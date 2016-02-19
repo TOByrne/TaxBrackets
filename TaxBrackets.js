@@ -99,9 +99,51 @@ $(function () {
 			plotBands: [{
 				color: '#FCFFC5',
 				from: 0,
-				to: 100,
+				to: 18,
 				label: {
-					text: "10%"
+					text: "Joint @ 10%"
+				}
+			},{
+				color: 'white',// '#FCFFC5',
+				from: 18,
+				to: 74,
+				label: {
+					text: "Joint @ 15%"
+				}
+			},{
+				color: '#FCFFC5',
+				from: 74,
+				to: 150,
+				label: {
+					text: "Joint @ 25%"
+				}
+			},{
+				color: 'white',// '#FCFFC5',
+				from: 150,
+				to: 229,
+				label: {
+					text: "Joint @ 28%"
+				}
+			},{
+				color: '#FCFFC5',
+				from: 229,
+				to: 410,
+				label: {
+					text: "Joint @ 33%"
+				}
+			},{
+				color: 'white',// '#FCFFC5',
+				from: 410,
+				to: 463,
+				label: {
+					text: "Joint @ 35%"
+				}
+			},{
+				color: '#FCFFC5',
+				from: 463,
+				to: 600,
+				label: {
+					text: "Joint @ 39.6%"
 				}
 			}]
 		},
