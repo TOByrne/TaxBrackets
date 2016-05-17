@@ -24,12 +24,31 @@ var seriesBeforeTax = {name: "Before Tax", data: []},
 	singleSeriesAfterTax = {name: "Filing Joint", data: []},
 	jointSeriesAfterTax = {name: "Filing Single", data: []},
 	singleTaxAmount = {name: "Single Tax Amount", data: []},
-	jointTaxAmount = {name: "Joint Tax Amount", data: []};
+	jointTaxAmount = {name: "Joint Tax Amount", data: []},
+	xAxis = [];
+
+function BuildXAxis(){
+	var brackets = GetRelevantTaxBrackets(taxBrackets.single, 500000);
+
+	var bracket = [];
+	var bracketID = 0;
+	var currentBracket = brackets[0];
+	for(var beforeTax = 1000; beforeTax <= 500000; beforeTax += 1000){
+
+		if(!(beforeTax > currentBracket.min && beforeTax <= currentBracket.max)){
+			bracketID++;
+			currentBracket = brackets[bracketID];
+
+			xAxis.push([currentBracket.rate + "%", bracket]);
+			bracket = [];
+		}
+
+		bracket.push(beforeTax);
+	}
+}
 
 function ProcessIncomes(){
-	for(var i = 1000; i <= 500000; i += 1000){
-		beforeTax = i;
-
+	for(var beforeTax = 1000; beforeTax <= 500000; beforeTax += 1000){
 		seriesBeforeTax.data.push(beforeTax);
 
 		var singleTax = CalculateTax(taxBrackets.single, beforeTax);
@@ -78,6 +97,7 @@ function GetRelevantTaxBrackets(brackets, income){
 }
 
 ProcessIncomes();
+BuildXAxis();
 
 function findPlotPoint(brackets, incomeVal) {
 	for (var bracket in brackets) {
@@ -95,57 +115,60 @@ $(function () {
 			x: -20 //center
 		},
 		xAxis: {
-			type: 'linear',
-			plotBands: [{
-				color: '#FCFFC5',
-				from: 0,
-				to: 18,
-				label: {
-					text: "Joint @ 10%"
-				}
-			},{
-				color: 'white',// '#FCFFC5',
-				from: 18,
-				to: 74,
-				label: {
-					text: "Joint @ 15%"
-				}
-			},{
-				color: '#FCFFC5',
-				from: 74,
-				to: 150,
-				label: {
-					text: "Joint @ 25%"
-				}
-			},{
-				color: 'white',// '#FCFFC5',
-				from: 150,
-				to: 229,
-				label: {
-					text: "Joint @ 28%"
-				}
-			},{
-				color: '#FCFFC5',
-				from: 229,
-				to: 410,
-				label: {
-					text: "Joint @ 33%"
-				}
-			},{
-				color: 'white',// '#FCFFC5',
-				from: 410,
-				to: 463,
-				label: {
-					text: "Joint @ 35%"
-				}
-			},{
-				color: '#FCFFC5',
-				from: 463,
-				to: 600,
-				label: {
-					text: "Joint @ 39.6%"
-				}
-			}]
+			// type: 'linear',
+			units: xAxis,
+			alternateGridColor: '#FDFFD5',
+			categories: [ '10%', '15%', '25%', '28%', '33%', '35%', '39.6%']
+			// plotBands: [{
+			// 	color: '#FCFFC5',
+			// 	from: 0,
+			// 	to: 18,
+			// 	label: {
+			// 		text: "Joint @ 10%"
+			// 	}
+			// },{
+			// 	color: 'white',// '#FCFFC5',
+			// 	from: 18,
+			// 	to: 74,
+			// 	label: {
+			// 		text: "Joint @ 15%"
+			// 	}
+			// },{
+			// 	color: '#FCFFC5',
+			// 	from: 74,
+			// 	to: 150,
+			// 	label: {
+			// 		text: "Joint @ 25%"
+			// 	}
+			// },{
+			// 	color: 'white',// '#FCFFC5',
+			// 	from: 150,
+			// 	to: 229,
+			// 	label: {
+			// 		text: "Joint @ 28%"
+			// 	}
+			// },{
+			// 	color: '#FCFFC5',
+			// 	from: 229,
+			// 	to: 410,
+			// 	label: {
+			// 		text: "Joint @ 33%"
+			// 	}
+			// },{
+			// 	color: 'white',// '#FCFFC5',
+			// 	from: 410,
+			// 	to: 463,
+			// 	label: {
+			// 		text: "Joint @ 35%"
+			// 	}
+			// },{
+			// 	color: '#FCFFC5',
+			// 	from: 463,
+			// 	to: 600,
+			// 	label: {
+			// 		text: "Joint @ 39.6%"
+			// 	}
+			// }]
 		},
 		yAxis: {
 			title: {
