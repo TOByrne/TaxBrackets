@@ -7,7 +7,7 @@ var taxBrackets = {
 		{ rate:	28,		min: 151201,	max: 230450 },
 		{ rate:	33,		min: 230451,	max: 411500 },
 		{ rate:	35,		min: 411501,	max: 464850 },
-		{ rate:	396,	min: 464851,	max: Number.MAX_SAFE_INTEGER }
+		{ rate:	39.6,	min: 464851,	max: Number.MAX_SAFE_INTEGER }
 	],
 	single:[
 		{ rate:	10,		min: 0,			max: 9225 },
@@ -16,7 +16,7 @@ var taxBrackets = {
 		{ rate:	28,		min: 90750,		max: 189300 },
 		{ rate:	33,		min: 189300,	max: 411500 },
 		{ rate:	35,		min: 411500,	max: 413200 },
-		{ rate:	396,	min: 413200,	max: Number.MAX_SAFE_INTEGER }
+		{ rate:	39.6,	min: 413200,	max: Number.MAX_SAFE_INTEGER }
 	]
 }
 
